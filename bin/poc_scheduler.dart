@@ -4,7 +4,7 @@ import 'functions.dart';
 import 'scheduler.dart';
 
 Future<void> main() async {
-  await example3();
+  await exampleScheduler3();
 }
 
 //Choose one from the examples below to run in the main function.
@@ -18,14 +18,14 @@ final mediumDuration = 5;
 final thirdOrder = '3rd order - 200mL cup';
 final shortDuration = 2;
 
-Future<void> example1() async {
+Future<void> exampleScheduler1() async {
   //this example runs as a FIFO.
   await orderLatte(hint: firstOrder, duration: bigDuration);
   await orderLatte(hint: secondOrder, duration: mediumDuration);
   await orderLatte(hint:thirdOrder, duration: shortDuration);
 }
 
-void example2() {
+void exampleScheduler2() {
   //this example synchronously.
   //The shortDuration order will arrive first, since they all are asked at
   //the same time.
@@ -34,7 +34,7 @@ void example2() {
   unawaited(orderLatte(hint: thirdOrder, duration: shortDuration));
 }
 
-Future<void> example3() async {
+Future<void> exampleScheduler3() async {
   final latteScheduler = Scheduler();
   // controller.stream.listen((event) async { await event.call();});
   Future orderA() async => await orderLatte(hint: firstOrder, duration: bigDuration);
