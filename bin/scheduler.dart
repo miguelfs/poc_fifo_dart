@@ -7,11 +7,11 @@ class Scheduler {
 
   final Queue<Future Function()> _queue = Queue<Future Function()>();
 
-  void schedule(Future Function() task) {
+  Future<void> schedule(Future Function() task) async {
     _queue.add(task);
     if (!_scheduled) {
       _scheduled = true;
-      Timer(Duration(seconds: 0), _execute);
+      await _execute();
     }
   }
 
